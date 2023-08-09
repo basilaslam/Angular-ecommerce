@@ -1,0 +1,132 @@
+app/
+|-- core/
+|   |-- authentication/
+|   |   |-- auth.service.ts
+|   |   |-- auth-guard.service.ts
+|   |
+|   |-- http-interceptors/
+|   |   |-- logging-interceptor.service.ts
+|   |   |-- auth-interceptor.service.ts
+|   |
+|   |-- error-handling/
+|   |   |-- error-handler.service.ts
+|   |
+|   |-- core.module.ts
+|
+|-- shared/
+|   |-- components/
+|   |   |-- header/
+|   |   |   |-- header.component.ts
+|   |   |   |-- header.component.html
+|   |   |
+|   |   |-- footer/
+|   |       |-- footer.component.ts
+|   |       |-- footer.component.html
+|   |
+|   |-- directives/
+|   |   |-- highlight.directive.ts
+|   |
+|   |-- pipes/
+|   |   |-- currency.pipe.ts
+|   |
+|   |-- services/
+|       |-- logger.service.ts
+|       |-- notification.service.ts
+|       |-- cart.service.ts
+|       |-- wishlist.service.ts
+|       |-- product.service.ts
+|       |-- ...
+|   |
+|   |-- shared.module.ts
+|
+|-- features/
+|   |-- home/
+|   |   |-- home.module.ts
+|   |   |-- components/
+|   |       |-- featured-products/
+|   |       |   |-- featured-products.component.ts
+|   |       |   |-- featured-products.component.html
+|   |
+|   |-- authentication/
+|   |   |-- authentication.module.ts
+|   |   |-- components/
+|   |       |-- login/
+|   |       |   |-- login.component.ts
+|   |       |   |-- login.component.html
+|   |       |
+|   |       |-- register/
+|   |           |-- register.component.ts
+|   |           |-- register.component.html
+|   |
+|   |-- product-catalog/
+|   |   |-- product-catalog.module.ts
+|   |   |-- components/
+|   |       |-- product-list/
+|   |       |   |-- product-list.component.ts
+|   |       |   |-- product-list.component.html
+|   |       |
+|   |       |-- product-detail/
+|   |           |-- product-detail.component.ts
+|   |           |-- product-detail.component.html
+|   |
+|   |-- cart/
+|   |   |-- cart.module.ts
+|   |   |-- components/
+|   |       |-- cart-view/
+|   |           |-- cart-view.component.ts
+|   |           |-- cart-view.component.html
+|   |
+|   |-- checkout/
+|   |   |-- checkout.module.ts
+|   |   |-- components/
+|   |       |-- shipping/
+|   |       |   |-- shipping.component.ts
+|   |       |   |-- shipping.component.html
+|   |       |
+|   |       |-- payment/
+|   |           |-- payment.component.ts
+|   |           |-- payment.component.html
+|   |
+|   |-- user-account/
+|   |   |-- user-account.module.ts
+|   |   |-- components/
+|   |       |-- profile/
+|   |       |   |-- profile.component.ts
+|   |       |   |-- profile.component.html
+|   |       |
+|   |       |-- order-history/
+|   |           |-- order-history.component.ts
+|   |           |-- order-history.component.html
+|   |
+|   |-- admin-dashboard/
+|   |   |-- admin-dashboard.module.ts
+|   |   |-- components/
+|   |       |-- dashboard/
+|   |           |-- dashboard.component.ts
+|   |           |-- dashboard.component.html
+|   |
+|   |-- search/
+|   |   |-- search.module.ts
+|   |   |-- components/
+|   |       |-- search-bar/
+|   |           |-- search-bar.component.ts
+|   |           |-- search-bar.component.html
+|   |
+|   |-- wishlist/
+|   |   |-- wishlist.module.ts
+|   |   |-- components/
+|   |       |-- wishlist-view/
+|   |           |-- wishlist-view.component.ts
+|   |           |-- wishlist-view.component.html
+|   |
+|   |-- reviews-ratings/
+|       |-- reviews-ratings.module.ts
+|       |-- components/
+|           |-- product-reviews/
+|               |-- product-reviews.component.ts
+|               |-- product-reviews.component.html
+|
+|-- app-routing.module.ts
+|-- app.component.html
+|-- app.component.ts
+|-- app.module.ts
