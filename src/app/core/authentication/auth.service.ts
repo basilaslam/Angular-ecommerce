@@ -1,18 +1,40 @@
-import { Injectable } from '@angular/core';
-import { LoginModel, RegisterModel } from './models/auth.model';
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { HostListener, Injectable } from '@angular/core';
 import {HttpClient } from '@angular/common/http'
-import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
-import { LoginApiResponse, RegisterApiResponse, LoggedInUser } from './models/api.model';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Router } from '@angular/router';
+
+import { environment } from 'src/environments/environment';
+import { LoginModel, RegisterModel } from './models/auth.model';
+import { LoginApiResponse, RegisterApiResponse, LoggedInUser, User } from './models/api.model';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private isAuthenticated = false;
 
-  constructor(private _httpClient: HttpClient, private _router: Router){}
+  private userSubject = new BehaviorSubject<User | null>(null)
+  private tokenSubject = new BehaviorSubject<string | null>(null)
+
+  constructor(
+    private _httpClient: HttpClient,
+    private _router: Router,
+
+    ){
+      this.initAuthStatus()
+    }
+
+    @HostListener('window:storage', ['$event'])
+    onStorageChange(event: StorageEvent) {
+      console.log(event.key);
+    }
+
+
+
+  initAuthStatus(){
+    this.tokenSubject.next(this.getAuthToken())
+  }
 
   register(user: RegisterModel): Observable<RegisterApiResponse> {
     user.role = 'USER'
@@ -24,10 +46,16 @@ export class AuthService {
     return this._httpClient.post<LoginApiResponse>(`${environment.URI}/users/login`, user)
   }
 
-  // Simulate user logout
-  logout(): void {
-    this.isAuthenticated = false;
+
+  saveData({data}: LoginApiResponse){
+    localStorage.setItem('_user', JSON.stringify(data.user))
+    this.userSubject.next(data.user)
+    localStorage.setItem('authToken', data.accessToken)
+    this.tokenSubject.next(data.accessToken)
+    localStorage.setItem('refreashToken', data.refreshToken)
   }
+
+
 
   getUser():  Observable<LoggedInUser>{
       return this._httpClient.get<LoggedInUser>(`${environment.URI}/users/current-user`)
@@ -43,16 +71,27 @@ export class AuthService {
       localStorage.setItem('authToken', '')
       localStorage.setItem('refreashToken', '')
       localStorage.setItem('_user', '')
+
+      this.tokenSubject.next(null)
+      this.tokenSubject.next(null)
       this._router.navigate(['/'])
     })
   }
 
 
   // Check if the user is authenticated
-  isAuthenticatedUser(): boolean {
-    const access = localStorage.getItem('authToken')
-
-    if(access) return true
-    return false
+  isAuthenticatedUser(): Observable<boolean> {
+    return this.getTokenObservable().pipe(
+      map((authToken) => !!authToken)
+    );
   }
+
+
+  getUserObservable(): Observable<User | null> {
+    return this.userSubject.asObservable()
+  }
+  getTokenObservable(): Observable<string | null> {
+    return this.tokenSubject.asObservable()
+  }
+
 }

@@ -10,7 +10,7 @@ import { map } from 'rxjs';
 export class NavbarComponent implements OnInit{
 
   state = false;
-  user!: User
+  user: User | null = null
   isUser = false
   navigation = [
     { title: "Features", path: "javascript:void(0)" },
@@ -23,11 +23,12 @@ export class NavbarComponent implements OnInit{
 
 
     ngOnInit(): void {
-     this.isUser = this._authService.isAuthenticatedUser()
-     this._authService.getUser().pipe(map(data => data.data)).subscribe(data => this.user = data)
+     this._authService.isAuthenticatedUser().subscribe((data) => {
+      this.isUser = data,
+      console.log('test init navbar');
 
-     console.log(this.user)
-
+     })
+     this._authService.getUserObservable().pipe(map(data => data)).subscribe(data => this.user = data)
     }
 
 

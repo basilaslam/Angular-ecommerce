@@ -25,7 +25,6 @@ export class SignupComponent {
       const user = this.signupForm.value
       this._authService.register(user).subscribe((data)=>{
         if(data.success){
-          localStorage.setItem("_user", JSON.stringify(data.data));
           this._router.navigate(['/auth/login'])
         }
       })
