@@ -23,9 +23,7 @@ export class LoginComponent {
       const user = this.loginForm.value
       this._authSercice.login(user).subscribe((data => {
         if(data.success){
-          localStorage.setItem('_user', JSON.stringify(data.data.user))
-          localStorage.setItem('authToken', data.data.accessToken)
-          localStorage.setItem('refreashToken', data.data.refreshToken)
+          this._authSercice.saveData(data)
           this._router.navigate(['/'])
         }
       }))
