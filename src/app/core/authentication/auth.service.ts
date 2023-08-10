@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { HostListener, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {HttpClient } from '@angular/common/http'
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Router } from '@angular/router';
@@ -16,7 +16,6 @@ export class AuthService {
 
   private userSubject = new BehaviorSubject<User | null>(null)
   private tokenSubject = new BehaviorSubject<string | null>(null)
-
   constructor(
     private _httpClient: HttpClient,
     private _router: Router,
@@ -25,21 +24,16 @@ export class AuthService {
       this.initAuthStatus()
     }
 
-    @HostListener('window:storage', ['$event'])
-    onStorageChange(event: StorageEvent) {
-      console.log(event.key);
-    }
-
 
 
   initAuthStatus(){
     this.tokenSubject.next(this.getAuthToken())
+    this.userSubject.next(JSON.parse(localStorage.getItem('_user') as string))
   }
 
   register(user: RegisterModel): Observable<RegisterApiResponse> {
     user.role = 'USER'
-    return this._httpClient.post<RegisterApiResponse>(`${environment.URI}/users/register`, user)
-
+   return this._httpClient.post<RegisterApiResponse>(`${environment.URI}/users/register`, user)
   }
 
   login(user:LoginModel): Observable<LoginApiResponse>{
@@ -86,6 +80,15 @@ export class AuthService {
     );
   }
 
+  getAuthInfo(){
+    const auth = localStorage.getItem('authToken')
+   if(auth){
+      return true
+    }else{
+      return false
+    }
+  }
+
 
   getUserObservable(): Observable<User | null> {
     return this.userSubject.asObservable()
@@ -93,5 +96,6 @@ export class AuthService {
   getTokenObservable(): Observable<string | null> {
     return this.tokenSubject.asObservable()
   }
+
 
 }
