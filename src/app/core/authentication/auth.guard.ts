@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | UrlTree {
-    if (this.authService.isAuthenticatedUser()) {
+    if (this.authService.getAuthInfo()) {
       return true;
     } else {
       // Redirect to the login page or another appropriate route

@@ -1,0 +1,62 @@
+<app-loading *ngIf="isLoading"></app-loading>
+
+
+
+<div class="bg-white" *ngIf="!isLoading">
+  <div class="pt-6">
+
+
+    <!-- Image gallery -->
+    <div class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8 mb-14">
+      <div class="hidden lg:grid lg:grid-cols-1 lg:gap-y-8 ">
+        <div class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
+          <img src={{images[0].url}} alt="Model wearing plain black basic tee."
+            class="h-full w-full object-cover object-center">
+        </div>
+        <div class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
+          <img src={{images[1].url}} alt="Model wearing plain gray basic tee."
+            class="h-full w-full object-cover object-center">
+        </div>
+      </div>
+      <div class="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
+        <img src={{images[2].url}} alt="Model wearing plain white basic tee."
+          class="h-full w-full object-cover object-center">
+      </div>
+
+      <!-- Options -->
+      <div class="mt-4 lg:row-span-3 lg:mt-0 ml-5">
+        <div class="lg:col-span-2  lg:pr-8 mt-10">
+          <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{product.name}}</h1>
+        </div>
+
+        <div class="py-10 lg:col-span-2 lg:col-start-1  lg:pb-16 lg:pr-8 lg:pt-6">
+          <!-- Description and details -->
+          <div>
+            <h3 class="font-medium">Description</h3>
+            <div class="space-y-6">
+              <p class="text-base text-gray-900">{{product.description}}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="py-10 lg:b-2 lg:col-span-2 lg:col-start-1 lg:pr-8 lg:pt-6">
+          <!-- Description and details -->
+          <div>
+            <div class="">
+              <p class="font-medium text-lg text-red-800">Current Stoke: {{product.stock}}</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-3xl tracking-tight text-gray-900">{{product.price}}</p>
+        <!-- Reviews -->
+        <button *ngIf="isStock" (click)="addToCart()"
+          class="mt-10 flex w-5/6 mx-auto items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 ">Add
+          to bag</button>
+        <button *ngIf="!isStock" disabled
+          class="mt-10 flex  items-center justify-center rounded-md border border-transparent bg-red-500 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2">currently
+          out of stoke</button>
+      </div>
+    </div>
+  </div>
+</div>

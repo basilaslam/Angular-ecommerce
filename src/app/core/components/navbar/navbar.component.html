@@ -26,7 +26,7 @@
     <div [ngClass]="{'block': state, 'hidden': !state}" class="flex-1 items-center mt-8 md:mt-0 md:flex">
       <ul class="justify-center items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
         <li *ngFor="let item of navigation; let idx = index" class="text-gray-700 hover:text-gray-900">
-          <a [href]="item.path" class="block">{{ item.title }}</a>
+          <a [routerLink]="item.path" class="block">{{ item.title }}</a>
         </li>
 
       </ul>
@@ -34,7 +34,12 @@
       <div *ngIf="isUser && user"
         class="flex-1 gap-x-6 items-center justify-end mt-6 space-y-6 md:flex md:space-y-0 md:mt-0">
         <app-avatar [user]="user" (signout)="signOut()"></app-avatar>
+        <a routerLink="/cart">
+
+          <app-cart></app-cart>
+        </a>
       </div>
+
       <div *ngIf="!isUser" class="flex-1 gap-x-6 items-center justify-end mt-6 space-y-6 md:flex md:space-y-0 md:mt-0">
         <a routerLink="auth/login" class="block text-gray-700 hover:text-gray-900">Log in</a>
         <a routerLink="auth/sign-up"

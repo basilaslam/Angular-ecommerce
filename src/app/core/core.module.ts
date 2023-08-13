@@ -8,6 +8,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AvatarComponent } from './components/navbar/components/avatar/avatar.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { CartComponent } from './components/navbar/components/cart/cart.component';
 
 
 
@@ -17,7 +18,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     NavbarComponent,
     HeaderComponent,
     FooterComponent,
-    AvatarComponent
+    AvatarComponent,
+    CartComponent
   ],
   imports: [
     CommonModule,

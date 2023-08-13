@@ -1,34 +1,34 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../../authentication/auth.service';
 import { User } from '../../authentication/models/api.model';
 import { map } from 'rxjs';
+import { SubSink } from 'subsink';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html'
 })
-export class NavbarComponent implements OnInit{
-
+export class NavbarComponent implements OnInit, OnDestroy{
+  subs = new SubSink()
   state = false;
   user: User | null = null
   isUser = false
   navigation = [
-    { title: "Features", path: "javascript:void(0)" },
-    { title: "Integrations", path: "javascript:void(0)" },
+    { title: "Products", path: "products/list-all" },
     { title: "Customers", path: "javascript:void(0)" },
-    { title: "Pricing", path: "javascript:void(0)" }
+    { title: "About", path: "/about" }
   ];
 
   constructor(private _authService: AuthService, ) {}
 
 
     ngOnInit(): void {
-     this._authService.isAuthenticatedUser().subscribe((data) => {
+     this.subs.add(this._authService.isAuthenticatedUser().subscribe((data) => {
       this.isUser = data,
       console.log('test init navbar');
 
-     })
-     this._authService.getUserObservable().pipe(map(data => data)).subscribe(data => this.user = data)
+     }))
+    this.subs.add(this._authService.getUserObservable().pipe(map(data => data)).subscribe(data => this.user = data))
     }
 
 
@@ -39,7 +39,11 @@ export class NavbarComponent implements OnInit{
 
 
   toggleClick(){
-    console.log(this.state)
     this.state = !this.state
+  }
+
+
+  ngOnDestroy(){
+    this.subs.unsubscribe()
   }
 }
