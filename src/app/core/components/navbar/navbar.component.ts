@@ -15,9 +15,8 @@ export class NavbarComponent implements OnInit, OnDestroy{
   isUser = false
   navigation = [
     { title: "Products", path: "products/list-all" },
-    { title: "Integrations", path: "javascript:void(0)" },
     { title: "Customers", path: "javascript:void(0)" },
-    { title: "Pricing", path: "javascript:void(0)" }
+    { title: "About", path: "/about" }
   ];
 
   constructor(private _authService: AuthService, ) {}
@@ -40,7 +39,6 @@ export class NavbarComponent implements OnInit, OnDestroy{
 
 
   toggleClick(){
-    console.log(this.state)
     this.state = !this.state
   }
 

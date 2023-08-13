@@ -7,12 +7,14 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { LoginModel, RegisterModel } from './models/auth.model';
 import { LoginApiResponse, RegisterApiResponse, LoggedInUser, User } from './models/api.model';
+import { SubSink } from 'subsink';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  subs = new SubSink()
 
   private userSubject = new BehaviorSubject<User | null>(null)
   private tokenSubject = new BehaviorSubject<string | null>(null)

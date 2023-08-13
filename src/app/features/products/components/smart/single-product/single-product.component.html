@@ -50,14 +50,12 @@
 
         <p class="text-3xl tracking-tight text-gray-900">{{product.price}}</p>
         <!-- Reviews -->
-        <form class="mt-10">
-          <button *ngIf="isStock" type="submit"
-            class="mt-10 flex w-5/6 mx-auto items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Add
-            to bag</button>
-          <button *ngIf="!isStock" disabled
-            class="mt-10 flex  items-center justify-center rounded-md border border-transparent bg-red-500 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2">currently
-            out of stoke</button>
-        </form>
+        <button *ngIf="isStock" (click)="addToCart()"
+          class="mt-10 flex w-5/6 mx-auto items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 ">Add
+          to bag</button>
+        <button *ngIf="!isStock" disabled
+          class="mt-10 flex  items-center justify-center rounded-md border border-transparent bg-red-500 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2">currently
+          out of stoke</button>
       </div>
     </div>
   </div>

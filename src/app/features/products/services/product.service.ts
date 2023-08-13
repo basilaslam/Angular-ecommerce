@@ -23,8 +23,4 @@ export class ProductService {
     return this._httpClient.get<AllProductsResponseModel>(`${this.URI}/ecommerce/products?page=1&limit=10`)
   }
 
-  addToCart(id: string) {
-    console.log(id);
-
-  }
 }
