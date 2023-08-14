@@ -1,0 +1,14 @@
+<section class="container  mx-auto  min-h-screen">
+  <div class="flex w-full justify-between">
+    <h1 class="text-2xl my-5 font-extrabold md:mx-32">Select Address</h1>
+    <button routerLink="/user/address/add" class="flex gap-3 dark_button w-fit h-fit align-middle">
+      <p>Add</p>
+      <img class="w-6 h-6" src="https://img.icons8.com/?size=512&id=102544&format=png" alt="">
+    </button>
+  </div>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-5 md:mx-32">
+
+    <app-address-card *ngFor="let address of addresses" [address]="address"
+      (deleteAddressEvent)="deleteAddress($event)"></app-address-card>
+  </div>
+</section>
