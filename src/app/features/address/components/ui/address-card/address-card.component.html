@@ -1,1 +1,25 @@
-<p>address-card works!</p>
+<article class="rounded-xl border border-gray-300 bg-white shadow-md" *ngIf="address">
+  <div class="flex items-start gap-4 p-4 sm:p-6 lg:p-8">
+    <div>
+      <div class="flex justify-between">
+        <h3 class="font-semibold text-lg text-gray-800">{{ user.username }}</h3>
+        <div class="flex justify-around">
+          <button class="h-8 2-8" routerLink="/user/address/edit/{{address._id}}">
+            <img class="h-6 w-6 m-1 cursor-pointer" src="https://img.icons8.com/?size=512&id=3553&format=png" alt="">
+
+          </button>
+          <button class="h-8 2-8" (click)="deleteAddress()">
+            <img class="h-full w-full" src="https://img.icons8.com/?size=512&id=102350&format=png" alt="">
+          </button>
+        </div>
+
+
+
+      </div>
+      <p class="line-clamp-2 text-sm text-gray-600 mt-1">
+        {{ address.addressLine1 }}, {{ address.addressLine2 }}, {{ address.city }},
+        {{ address.state }}, {{ address.country }}, {{ address.pincode }}
+      </p>
+    </div>
+  </div>
+</article>
