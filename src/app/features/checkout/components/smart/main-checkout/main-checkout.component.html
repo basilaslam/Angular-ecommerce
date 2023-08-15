@@ -1,0 +1,14 @@
+<section class="h-screen flex justify-between border-2 px-28 cursor-pointer">
+  <div class="address grid grid-flow-row gap-5 md:mx-32 h-fit pt-16">
+    <app-address-card (click)="selectAddress(address)" [selected]="selectedAddresses[address._id]"
+      *ngFor="let address of addresses" [address]="address" (deleteAddressEvent)="deleteAddress($event)">
+    </app-address-card>
+  </div>
+  <div class="right">
+
+    <app-cart-items *ngIf="cart" (checkoutEvent)="checkoutCart()" [cart]="cart"
+      [cartItems]="cart.items"></app-cart-items>
+
+
+  </div>
+</section>
