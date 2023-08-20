@@ -11,6 +11,7 @@ import { CartService } from 'src/app/shared/services/cart.service';
 })
 export class ListProductsComponent implements OnInit {
   products: Product[] = [];
+  isLoading = true
 
   constructor(private _productServices: ProductService, private _cartService:CartService) {}
 
@@ -19,6 +20,9 @@ export class ListProductsComponent implements OnInit {
       map((res) => res.data.products)
     ).subscribe((data) => {
       this.products = data;
+      setTimeout(()=>{
+        this.isLoading = false
+      },1500)
     });
   }
 
