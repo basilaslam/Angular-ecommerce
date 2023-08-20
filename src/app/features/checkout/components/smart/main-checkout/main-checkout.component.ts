@@ -10,6 +10,7 @@ import { WindowService } from '../../../../../shared/services/widow.service'
 import { RazorpayApiData, RazorpaySuccessResponse } from '../../../models/razorpay.model';
 import { environment } from 'src/environments/environment';
 import { User } from 'src/app/core/authentication/models/api.model';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @Component({
   selector: 'app-main-checkout',
@@ -29,6 +30,7 @@ constructor(
   private _cartService: CartService,
   private _paymentService: PaymentService,
   private _winRef: WindowService,
+  private _toast: HotToastService
   ){
   }
   ngOnInit(): void {
@@ -102,9 +104,13 @@ constructor(
     const responsHandler = (data: RazorpaySuccessResponse) => {
       this._paymentService.verifyRazorpayPayment(data).subscribe(data => {
         if(data.success){
+          this._toast.success('📦order placed')
           this._cartService.cart.set(null)
           this._cartService.cartTotal.set(0)
           this.redirectToProducts()
+        }else{
+          this._toast.error('💵 failed redircting to cart')
+          this._router.navigate(['/cart'])
         }
       })
       }

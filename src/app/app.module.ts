@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { environment } from 'src/environments/environment';
+import { HotToastModule } from '@ngneat/hot-toast';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,8 @@ import { environment } from 'src/environments/environment';
     BrowserModule,
     AppRoutingModule,
     CoreModule,
-    NgxPayPalModule
+    NgxPayPalModule,
+    HotToastModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,5 @@
 import { Component, effect } from '@angular/core';
+import { HotToastService } from '@ngneat/hot-toast';
 import { CartData, CartItem } from 'src/app/shared/models/cart.model';
 import { CartService } from 'src/app/shared/services/cart.service';
 
@@ -12,7 +13,7 @@ export class ShowCartComponent {
   data: CartData | null = null
   items: CartItem[]  | undefined;
   isEmpty = true
-  constructor(private _cartService: CartService){
+  constructor(private _cartService: CartService, private _toast: HotToastService){
     effect(()=>{
       this.data = this._cartService.cart()
       this.items = this.data?.items
@@ -20,12 +21,14 @@ export class ShowCartComponent {
   }
 
   clearCart(){
+    this._toast.error('cart cleared')
     this._cartService.clearCart()
   }
 
   removeItem(id: string){
    this._cartService.removeItem(id).subscribe((data)=>{
     if(data.success){
+      this._toast.error('🛒 item removed from cart')
       this._cartService.refreashCart()
     }
    })
