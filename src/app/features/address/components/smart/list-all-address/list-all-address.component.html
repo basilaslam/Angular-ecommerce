@@ -7,7 +7,6 @@
     </button>
   </div>
   <div class="grid grid-cols-2 md:grid-cols-4 gap-5 md:mx-32">
-
     <app-address-card *ngFor="let address of addresses" [address]="address"
       (deleteAddressEvent)="deleteAddress($event)"></app-address-card>
   </div>

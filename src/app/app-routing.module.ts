@@ -8,7 +8,8 @@ const routes: Routes = [{ path: 'features/home', loadChildren: () => import('./f
 { path: 'user/profile', loadChildren: () => import('./features/profile/profile.module').then(m => m.ProfileModule), canActivate: [AuthGuard]},
 { path: 'products', loadChildren: () => import('./features/products/products.module').then(m => m.ProductsModule), canActivate: [AuthGuard] },
 { path: 'cart', loadChildren: () => import('./features/cart/cart.module').then(m => m.CartModule) },
-{ path: 'user/address', loadChildren: () => import('./features/address/address.module').then(m => m.AddressModule) },];
+{ path: 'user/address', loadChildren: () => import('./features/address/address.module').then(m => m.AddressModule) },
+{ path: 'cart/checkout', loadChildren: () => import('./features/checkout/checkout.module').then(m => m.CheckoutModule) },];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
