@@ -6,6 +6,7 @@ import {  Observable } from 'rxjs';
 import { updateCartTotal } from '../store/cart/cart.actions';
 import {  select } from '@ngrx/store';
 import { selectCartTotal } from '../store/cart/cart.selectors';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class CartService {
   private URI = environment.URI
 
 
-  constructor(private _httpClient: HttpClient) {
+  constructor(private _httpClient: HttpClient, private _toast: HotToastService) {
     this.fetchCartData();
   }
   public cart = signal<CartData | null>(null)
@@ -47,15 +48,16 @@ export class CartService {
 
   addToCart(id: string){
 
-    const isExist = this.cart()?.items.find(item => item._id == id)
+    const isExist = this.cart()?.items.find(item => item.product._id == id)
 
     if(!isExist){
       this._httpClient.post<CartApiResponse>(`${this.URI}/ecommerce/cart/item/${id}`, { quantity: 1}).subscribe((data)=>{
+        this._toast.success('🛒 item added to cart',{duration: 1000 })
         this.cart.set(data.data)
         this.cartTotal.update( val => val + 1)
        })
     }else{
-      console.log('alredy exist')
+      this._toast.error('🛒 item aleady exist in cart',{duration: 1000 })
     }
 
   }
