@@ -29,7 +29,8 @@ constructor(
   private _cartService: CartService,
   private _paymentService: PaymentService,
   private _winRef: WindowService,
-  ){}
+  ){
+  }
   ngOnInit(): void {
     this._cartService.getCart().subscribe(data => {
       if(data.data.items.length <= 0){
@@ -101,6 +102,8 @@ constructor(
     const responsHandler = (data: RazorpaySuccessResponse) => {
       this._paymentService.verifyRazorpayPayment(data).subscribe(data => {
         if(data.success){
+          this._cartService.cart.set(null)
+          this._cartService.cartTotal.set(0)
           this.redirectToProducts()
         }
       })
