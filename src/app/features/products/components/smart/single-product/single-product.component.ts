@@ -25,11 +25,16 @@ export class SingleProductComponent implements OnInit, OnDestroy{
     const id = this._Activatedroute.snapshot.paramMap.get('id');
     id&&this.subs.add(this._productService.getProduct(id).subscribe((data) => {
       this.product = data.data
-      this.isLoading = false
       this.images = this.product.subImages
+
+      setTimeout(()=>{
+              this.isLoading = false
+
+      },1000)
       if(!this.product.stock){
         this.isStock =  false
       }
+
     }))
      }
 
