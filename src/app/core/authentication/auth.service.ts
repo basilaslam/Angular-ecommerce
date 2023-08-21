@@ -29,8 +29,11 @@ export class AuthService {
 
 
   initAuthStatus(){
-    this.tokenSubject.next(this.getAuthToken())
-    this.userSubject.next(JSON.parse(localStorage.getItem('_user') as string))
+    const user = localStorage.getItem('_user')
+    if(user){
+      this.tokenSubject.next(this.getAuthToken())
+      this.userSubject.next(JSON.parse( user))
+    }
   }
 
   register(user: RegisterModel): Observable<RegisterApiResponse> {
