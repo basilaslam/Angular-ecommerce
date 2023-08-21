@@ -3,9 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { CartApiResponse, CartData } from '../models/cart.model';
 import {  Observable } from 'rxjs';
-import { updateCartTotal } from '../store/cart/cart.actions';
-import {  select } from '@ngrx/store';
-import { selectCartTotal } from '../store/cart/cart.selectors';
 import { HotToastService } from '@ngneat/hot-toast';
 
 @Injectable({
@@ -27,7 +24,6 @@ export class CartService {
       (data) => {
         this.cart.set(data.data)
         this.cartTotal.set(data.data.items.length)
-
       },
       (error) => {
         console.error('An error occurred while fetching cart data:', error);

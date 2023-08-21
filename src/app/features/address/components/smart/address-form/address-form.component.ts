@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'; // Import FormBuilder and FormGroup
 import { AddressService } from '../../../services/address.service';
 import { Address } from '../../../models/address.model';
+import { HotToastService } from '@ngneat/hot-toast';
 
 
 @Component({
@@ -11,20 +12,20 @@ import { Address } from '../../../models/address.model';
   styleUrls: ['./address-form.component.css']
 })
 export class AddressFormComponent implements OnInit {
-  addressForm!: FormGroup; // Declare a FormGroup
+  addressForm!: FormGroup;
   id!: string
   @Input() mode!: 'add' | 'edit'
   constructor(
     private _activatedroute: ActivatedRoute,
     private _addressService: AddressService,
-    private _formBuilder: FormBuilder, // Inject FormBuilder
-    private _router: Router // Inject Router
+    private _formBuilder: FormBuilder,
+    private _router: Router ,
+    private _toast: HotToastService
   ) {}
 
 
 
   ngOnInit(): void {
-    console.log(this.mode);
 
     if(this.mode == 'edit'){
 
@@ -54,16 +55,16 @@ export class AddressFormComponent implements OnInit {
     if (this.addressForm.valid) {
       const updatedAddress: Address = this.addressForm.value;
       // Perform the update logic
-      console.log(updatedAddress);
 
       this._addressService.updateAddress(this.id, updatedAddress).subscribe(() => {
-              this._router.navigate(['/user/address/list-all']);
+                  this._toast.success('📝 address updated');
+
+              this._router.navigate(['/profile/address/list-all']);
       });
     }
   }
 
   handleSubmit(){
-    console.log(this.mode);
 
     if(this.mode == 'add'){
       this.createAddress()
@@ -76,9 +77,9 @@ export class AddressFormComponent implements OnInit {
     if (this.addressForm.valid) {
       const newAddress: Address = this.addressForm.value;
       // Perform the update logic
-      console.log(newAddress);
       this._addressService.createAddress(newAddress).subscribe(() => {
-              this._router.navigate(['/user/address/list-all']);
+          this._toast.success('📝 address created')
+              this._router.navigate(['/profile/address/list-all']);
       });
     }
   }

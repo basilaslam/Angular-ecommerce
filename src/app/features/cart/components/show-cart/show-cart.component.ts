@@ -40,7 +40,6 @@ export class ShowCartComponent {
   }
 
   increaseQuantity(id: string, quantity: number){
-    console.log('countIncresed', id);
     this._cartService.updateQuantity(id, quantity+1)
 
   }

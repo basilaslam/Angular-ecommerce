@@ -22,7 +22,6 @@ export class SignupComponent implements OnDestroy{
   }
 
   onSubmit() {
-    console.log('submit');
 
     if (this.signupForm.valid) {
       const user = this.signupForm.value

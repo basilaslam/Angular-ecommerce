@@ -56,14 +56,13 @@ constructor(
   }
 
   deleteAddress(id: string){
-    this._router.navigate(['/user/address/list-all'])
+    this._router.navigate(['/profile/address/list-all'])
   }
 
 
   selectAddress(address: Address) {
     this.initializeSelectedAddresses()
     this.selectedAddresses[address._id] = !this.selectedAddresses[address._id];
-    console.log('selected..');
   }
 
   private findSelectedAddress(): string | undefined {
@@ -79,7 +78,6 @@ constructor(
   checkoutCart(){
     const selectedAddressId = this.findSelectedAddress();
     if (!selectedAddressId) {
-      console.log('no address selected');
       return
   }
 
@@ -142,7 +140,6 @@ constructor(
     const rzp1 = new this._winRef.nativeWindow.Razorpay(options);
     rzp1.on('payment.success', (response: any) => {
       // Handle success
-      console.log('Payment successful', response);
     });
     rzp1.on('payment.error', (response: any) => {
       // Handle error

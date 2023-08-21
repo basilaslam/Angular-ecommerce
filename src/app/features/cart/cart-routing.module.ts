@@ -5,6 +5,7 @@ import { ShowCartComponent } from './components/show-cart/show-cart.component';
 
 const routes: Routes = [{ path: '', component: CartComponent, children:[
   {path: '', component: ShowCartComponent},
+  {path: '**', redirectTo: ''}
 ] }];
 
 @NgModule({

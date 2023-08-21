@@ -9,6 +9,7 @@ import { TopCollectionsComponent } from './components/smart/top-collections/top-
 import { SaleBannerComponent } from './components/ui/sale-banner/sale-banner.component';
 import { NewsletterBannerComponent } from './components/ui/newsletter-banner/newsletter-banner.component';
 import { TopCollectionCardComponent } from './components/ui/top-collection-card/top-collection-card.component';
+import { AboutComponent } from './components/ui/about/about.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { TopCollectionCardComponent } from './components/ui/top-collection-card/
     TopCollectionsComponent,
     SaleBannerComponent,
     NewsletterBannerComponent,
-    TopCollectionCardComponent
+    TopCollectionCardComponent,
+    AboutComponent
   ],
   imports: [
     CommonModule,
