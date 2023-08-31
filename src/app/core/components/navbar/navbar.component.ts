@@ -15,7 +15,6 @@ export class NavbarComponent implements OnInit, OnDestroy{
   isUser = false
   navigation = [
     { title: "Products", path: "products/list-all" },
-    { title: "Customers", path: "javascript:void(0)" },
     { title: "About", path: "/about" }
   ];
 
@@ -24,9 +23,7 @@ export class NavbarComponent implements OnInit, OnDestroy{
 
     ngOnInit(): void {
      this.subs.add(this._authService.isAuthenticatedUser().subscribe((data) => {
-      this.isUser = data,
-      console.log('test init navbar');
-
+      this.isUser = data
      }))
     this.subs.add(this._authService.getUserObservable().pipe(map(data => data)).subscribe(data => this.user = data))
     }

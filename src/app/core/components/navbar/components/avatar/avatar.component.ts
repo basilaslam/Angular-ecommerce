@@ -10,9 +10,7 @@ export class AvatarComponent{
   @Output() signout = new EventEmitter()
   @Input() user!:User
 
-  ngOnInit(){
-    console.log(this.user)
-  }
+
   signOut(){
     this.signout.emit()
   }

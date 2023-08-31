@@ -10,29 +10,35 @@ import { SubSink } from 'subsink';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  subs = new SubSink()
+  subs = new SubSink();
+  isDisabled = true;
 
-  constructor(private _formBuilder: FormBuilder, private _authSercice: AuthService, private _router: Router) {
+  constructor(
+    private _formBuilder: FormBuilder,
+    private _authSercice: AuthService,
+    private _router: Router
+  ) {
     this.loginForm = this._formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
   }
 
-
   onSubmit() {
     if (this.loginForm.valid) {
-      const user = this.loginForm.value
-      this.subs.add(this._authSercice.login(user).subscribe((data => {
-        if(data.success){
-          this._authSercice.saveData(data)
-          this._router.navigate(['/'])
-        }
-      })))
+      const user = this.loginForm.value;
+      this.subs.add(
+        this._authSercice.login(user).subscribe((data) => {
+          if (data.success) {
+            this._authSercice.saveData(data);
+            this._router.navigate(['/']);
+          }
+        })
+      );
     }
   }
 
-  onDestroy(){
-    this.subs.unsubscribe()
+  onDestroy() {
+    this.subs.unsubscribe();
   }
 }

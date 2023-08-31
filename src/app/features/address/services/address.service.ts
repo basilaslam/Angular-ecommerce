@@ -30,7 +30,6 @@ export class AddressService {
   }
 
   createAddress( address: Address): Observable<Address>{
-    console.log(address, 'adfsdf');
 
     return this._httpClient.post<SignleAddressApiResponse>(this.URI, address).pipe(map(data => data.data))
   }

@@ -23,7 +23,13 @@ export class ShowCartComponent {
   clearCart(){
     this._toast.error('cart cleared')
     this._cartService.clearCart()
+
+    this._cartService.log().subscribe(data => {
+      console.log(data)
+    })
   }
+
+
 
   removeItem(id: string){
    this._cartService.removeItem(id).subscribe((data)=>{
@@ -40,7 +46,6 @@ export class ShowCartComponent {
   }
 
   increaseQuantity(id: string, quantity: number){
-    console.log('countIncresed', id);
     this._cartService.updateQuantity(id, quantity+1)
 
   }
